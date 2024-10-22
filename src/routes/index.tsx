@@ -38,16 +38,25 @@ export default component$(() => {
           </li>
         ))}
       </ul>
-      <ul>
+      <div class="flex flex-wrap gap-4">
         {products.value.map((product) => (
-          <li key={product.id}>
-            {product.title}: ${product.price}
-            <button onClick$={() => (cart.value = [...cart.value, product])}>
-              Buy
-            </button>
-          </li>
+          <div class="card bg-base-100 w-96 shadow-xl p-4" key={product.id}>
+            <figure>
+              <img class="w-full" src={product.images[0]} alt={product.title} />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">{product.title}</h2>
+              <p class="card-text">{product.description}</p>
+              <p class="card-text">${product.price}</p>
+            </div>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary" onClick$={() => (cart.value = [...cart.value, product])}>
+                Buy
+              </button>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
       <div>
         <Link href={`?page=${page - 1}`}>Previous</Link>
         <Link href={`?page=${page + 1}`}>Next</Link>
